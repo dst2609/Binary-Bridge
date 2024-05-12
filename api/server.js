@@ -1,56 +1,51 @@
-// imports
-const express = require("express");
-const axios = require("axios");
-const bodyParser = require("body-parser");
+require("dotenv").config(); // Load environment variables from .env file
 const cors = require("cors");
+const express = require("express");
+const morgan = require("morgan");
+const routes = require("./routes/routes");
+const { setupSecurity } = require("./security/security");
 
-// Middleware for front end and backend connection
-require("dotenv").config();
+//user routers and db connection:
+const { connectToDB, createUsersCollection } = require("./db/database.js");
 
 const app = express();
+
+// Configure CORS options to allow access only from localhost:5173
+// const corsOptions = {
+//   origin: "http://localhost:5173",
+// };
+
+// app.use(cors(corsOptions)); // Enable CORS with the specified options
+
+// Morgan middleware for logging requests
+app.use(morgan("dev"));
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.post("/api/chat", async (req, res) => {
-  const { message } = req.body;
+app.use(morgan("dev"));
 
-  try {
-    const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        model: "gpt-4", //using newwer gpt, gpt 3.5 was not learning as expected.
-        messages: [
-          {
-            role: "system",
-            content: "You are a helpful assistant designed to output JSON.",
-          },
-          { role: "user", content: `${message}` },
-        ],
-        // max_tokens: 150,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+// Security setup
+setupSecurity(app);
 
-    const reply = response.data.choices[0].message.content;
-    // console.log("Reply is: ", reply);
-    res.json({ message: reply });
-  } catch (error) {
-    console.error("Error in OpenAI API call:", error);
-    res.status(500).send("Error getting response from the AI");
-  }
-});
-
-// Define the default GET route for "/" this is for api-test
+// Define the default GET route for "/"
 app.get("/", (req, res) => {
-  res.send("Hello, this is the CS 220 final project");
+  res.send("Hello, this is Web Assembler and Disassembler ");
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Routes setup
+routes(app);
+
+// Connect to MongoDB
+connectToDB().then(() => {
+  //Create users collection
+  createUsersCollection();
+
+  // Routes
+  const userRoutes = require("./routes/userRoutes");
+  app.use("/users", userRoutes);
+
+  // Start the server
+  app.listen(3000, () => {
+    console.log("Server started on port 3000");
+  });
 });
