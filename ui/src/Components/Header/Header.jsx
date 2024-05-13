@@ -5,7 +5,7 @@ import "./Header.css";
 function Header() {
   return (
     <header className="header">
-      <h1>Web AI Based Assembler and Disassemble</h1>
+      <h1>Web AI Based Assembler and Disassembler</h1>
     </header>
   );
 }
