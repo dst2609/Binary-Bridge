@@ -1,0 +1,62 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Use full width of the container */
+  height: 90vh; /* Reduced height to 80% of the viewport height */
+  margin: 0 auto; /* Centered horizontally */
+  padding: 0;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.messages-container {
+  overflow-y: auto;
+  height: calc(90vh - 60px); /* Adjusted to new height of chat container */
+}
+
+.message {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  max-width: 90%;
+}
+
+.message.user {
+  background-color: #007bff;
+  align-self: flex-end;
+}
+
+.message.bot,
+.message.response {
+  background-color: #343a40;
+  align-self: flex-start;
+}
+
+.message.response.error-response {
+  background-color: #dc3545; /* Red background for error responses */
+  color: white;
+}
+
+.message-form {
+  display: flex;
+  margin-top: auto; /* Ensure form stays at the bottom */
+  padding: 10px;
+}
+
+.message-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: calc(100% - 22px); /* Adjusts width considering padding and borders */
+}
+
+.send-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}

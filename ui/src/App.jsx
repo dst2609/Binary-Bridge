@@ -11,6 +11,8 @@ import LoginForm from "./Components/LoginForm/LoginForm";
 import RegistrationForm from "./Components/RegistrationForm/RegistrationForm";
 import { jwtDecode } from "jwt-decode";
 import "./App.css";
+import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -81,52 +83,56 @@ function App() {
 
   return (
     <Router>
-      {loggedIn ? (
-        <div>
-          <header>
-            <nav>
-              <ul>
-                <li>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) => (isActive ? "active" : "")}
-                  >
-                    Dashboard
-                  </NavLink>
-                </li>
-                <li>
-                  <button onClick={handleLogout}>Logout</button>
-                </li>
-              </ul>
-            </nav>
-          </header>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-          </Routes>
-        </div>
-      ) : (
-        <div className="login-registration">
-          {showLoginForm ? (
+      <div className="app-container">
+        {" "}
+        {/* Flex container */}
+        <Header /> {/* Header remains at the top */}
+        <div className="content">
+          {" "}
+          {/* Main content area */}
+          {loggedIn ? (
             <>
-              <LoginForm onLogin={handleLogin} />
-              <div className="center-button">
-                <button onClick={() => setShowLoginForm(false)}>
-                  Not a user yet? Register here
-                </button>
-              </div>
+              <nav>
+                <ul>
+                  <li>
+                    <NavLink
+                      to="/"
+                      className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout}>Logout</button>
+                  </li>
+                </ul>
+              </nav>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+              </Routes>
             </>
           ) : (
-            <>
-              <RegistrationForm onRegister={handleRegistration} />
-              <div className="center-button">
-                <button onClick={() => setShowLoginForm(true)}>
-                  Already Registered? Login here
-                </button>
-              </div>
-            </>
+            <div className="login-registration">
+              {showLoginForm ? (
+                <>
+                  <LoginForm onLogin={handleLogin} />
+                  <button onClick={() => setShowLoginForm(false)}>
+                    Not a user yet? Register here
+                  </button>
+                </>
+              ) : (
+                <>
+                  <RegistrationForm onRegister={handleRegistration} />
+                  <button onClick={() => setShowLoginForm(true)}>
+                    Already Registered? Login here
+                  </button>
+                </>
+              )}
+            </div>
           )}
         </div>
-      )}
+        <Footer /> {/* Footer fixed at the bottom */}
+      </div>
     </Router>
   );
 }

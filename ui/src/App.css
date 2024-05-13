@@ -1,0 +1,52 @@
+.active {
+  color: red;
+}
+.inactive {
+  color: black;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, sans-serif; /* Set default font */
+}
+
+body {
+  padding-top: 70px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.main-content {
+  padding-top: 30px;
+}
+
+.content {
+  padding-top: 70px; /* Adjust based on your header height */
+  padding-bottom: 50px; /* Adjust based on your footer height */
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: auto; /* Adds scroll to the content area if needed */
+  min-height: calc(
+    100vh - 120px
+  ); /* Adjust height taking header and footer into account */
+}
+
+/* Ensure the main container allows for flex layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 50px;
+  }
+}

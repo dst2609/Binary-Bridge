@@ -1,11 +1,14 @@
 import React from "react";
 import Chat from "../Chat/Chat";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
-    <>
-      <Chat />{" "}
-    </>
+    <div className="dashboard-container">
+      <div className="chat-container">
+        <Chat />
+      </div>
+    </div>
   );
 };
 

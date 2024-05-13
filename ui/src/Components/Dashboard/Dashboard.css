@@ -1,0 +1,21 @@
+/* Dashboard.css */
+.dashboard-container {
+  padding-top: 70px; /* Space for the header */
+  padding-bottom: 60px; /* Increased space for the footer to ensure visibility */
+  padding-left: 10px; /* Optional: for better spacing on the sides */
+  padding-right: 10px; /* Optional: for better spacing on the sides */
+  min-height: calc(
+    100vh - 130px
+  ); /* Adjust height considering the header and footer */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the chat vertically in the available space */
+}
+
+.chat-container {
+  width: 100%; /* Use this to control the width of the chat component within the dashboard */
+  max-width: 960px; /* Maximum width can be adjusted */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds some shadow for better UI */
+  border-radius: 8px; /* Optional: Rounds the corners for a smoother look */
+  overflow: hidden; /* Keeps child elements contained within the border radius */
+}
