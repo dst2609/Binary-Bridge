@@ -14,7 +14,7 @@ body,
 html {
   padding: 0;
   margin: 0;
-  font-family: Arial, sans-serif; /* Set default font */
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -28,17 +28,14 @@ body {
 }
 
 .content {
-  padding-top: 70px; /* Adjust based on your header height */
-  padding-bottom: 50px; /* Adjust based on your footer height */
+  padding-top: 70px;
+  padding-bottom: 50px;
   padding-left: 10px;
   padding-right: 10px;
-  overflow: auto; /* Adds scroll to the content area if needed */
-  min-height: calc(
-    100vh - 120px
-  ); /* Adjust height taking header and footer into account */
+  overflow: auto;
+  min-height: calc(100vh - 120px);
 }
 
-/* Ensure the main container allows for flex layout */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -49,4 +46,12 @@ body {
   body {
     padding-top: 50px;
   }
+}
+
+.login-registration {
+  text-align: center;
+}
+
+.center-button {
+  margin-top: 20px;
 }
